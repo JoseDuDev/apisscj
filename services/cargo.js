@@ -41,7 +41,7 @@ async function update(id, cargo) {
     const result = await db.query(
         `UPDATE ${nome_tabela}
     SET nome=?
-    WHERE id=?`, [
+    WHERE cargoId=?`, [
             cargo.nome, id
         ]
     );
@@ -57,7 +57,7 @@ async function update(id, cargo) {
 
 async function remove(id) {
     const result = await db.query(
-        `DELETE FROM ${nome_tabela} WHERE id=?`, [id]
+        `DELETE FROM ${nome_tabela} WHERE cargoId=?`, [id]
     );
 
     let message = 'Erro ao deletar cargo';
@@ -71,8 +71,8 @@ async function remove(id) {
 
 async function get(id) {
     const rows = await db.query(
-        `SELECT id, nome
-    FROM ${nome_tabela} WHERE id=?`, [id]
+        `SELECT cargoId, nome
+    FROM ${nome_tabela} WHERE cargoId=?`, [id]
     );
     const data = helper.emptyOrRows(rows);
 
