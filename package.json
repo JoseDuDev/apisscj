@@ -1,0 +1,32 @@
+{
+  "name": "apisscj",
+  "version": "1.0.0",
+  "description": "Api de dados do SSCJ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseDuDev/apisscj.git"
+  },
+  "keywords": [
+    "sscj",
+    "santuario",
+    "dehonianos"
+  ],
+  "author": "Jose Eduardo Luciano da Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseDuDev/apisscj/issues"
+  },
+  "homepage": "https://github.com/JoseDuDev/apisscj#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mysql2": "^2.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
