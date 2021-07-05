@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     res.json({ 'message': 'ok' });
 })
 
-app.use('/api/programming-languages', programmingLanguagesRouter);
+// app.use('/api/programming-languages', programmingLanguagesRouter);
 app.use('/api/base', base);
 app.use('/api/cargo', cargo);
 app.use('/api/perfil', perfil);
