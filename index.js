@@ -6,8 +6,12 @@ const helmet = require('helmet');
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+/* Routes */
 const programmingLanguagesRouter = require('./routes/programmingLanguages');
+const base = require('./routes/base');
 const cargo = require('./routes/cargo');
+/* Routes */
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -22,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/programming-languages', programmingLanguagesRouter);
+app.use('/api/base', base);
 app.use('/api/cargo', cargo);
 
 /* Error handler middleware */

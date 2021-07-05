@@ -31,7 +31,7 @@ async function create(cargo) {
     let message = 'Erro na criação de cargo';
 
     if (result.affectedRows) {
-        message = 'Linguagem de programação criada com sucesso';
+        message = 'Cargo criada com sucesso';
     }
 
     return { message };
