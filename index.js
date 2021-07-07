@@ -14,6 +14,8 @@ app.use((req, res, next) => {
     const allowedOrigins = [
         'http://127.0.0.1:3000',
         'http://localhost:3000',
+        'http://127.0.0.1:3300',
+        'http://localhost:3300',
         'http://127.0.0.1:3001',
         'http://localhost:3001'
     ];
@@ -29,7 +31,7 @@ app.use((req, res, next) => {
     return next();
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3300;
 
 /* Routes */
 // const programmingLanguagesRouter = require('./routes/programmingLanguages');
