@@ -15,6 +15,7 @@ router.get('/', async function(req, res, next) {
 /* POST programming language */
 router.post('/', async function(req, res, next) {
     try {
+        console.log(req.body);
         res.json(await usuario.create(req.body));
     } catch (err) {
         console.error(`Erro ao criar usuario`, err.message);

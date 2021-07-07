@@ -23,28 +23,34 @@ async function getMultiple(page = 1) {
 }
 
 async function create(usuario) {
-    const result = await db.query(
-        `INSERT INTO ${nome_tabela} 
+    const sql = `INSERT INTO ${nome_tabela} 
                     (nome, avatar, email, telefone, celular, nascimento, 
-                      perfilId, provider, uid, criado, alterado, ativo) 
-        VALUES 
-        (?,?,?,?,?,?,?, SYSDATE(), SYSDATE(), 1)`, [
-            usuario.nome,
-            usuario.avatar,
-            usuario.email,
-            usuario.telefone,
-            usuario.celular,
-            usuario.nascimento,
-            usuario.perfilId,
-            usuario.provider,
-            usuario.uid
-        ]
-    );
+                    perfilId, provedor, uid, criado, alterado, ativo) 
+                VALUES (   
+                    '${usuario.nome}',
+                    '${usuario.avatar}',
+                    '${usuario.email}',
+                    null,
+                    null,
+                    null,
+                    ${usuario.perfilId},
+                    '${usuario.provedor}',
+                    '${usuario.uid}', 
+                    SYSDATE(), 
+                    SYSDATE(), 
+                    1
+                )`;
+    console.log(sql);
 
     let message = 'Erro na criação de usuario';
+    try {
+        const result = await db.query(sql);
 
-    if (result.affectedRows) {
-        message = 'usuario criada com sucesso';
+        if (result.affectedRows) {
+            message = 'usuario criada com sucesso';
+        }
+    } catch (e) {
+        message += `. | Erro: ${e}`;
     }
 
     return { message };
@@ -61,7 +67,7 @@ async function update(id, usuario) {
         celular=?,
         nascimento=?,
         perfilId=?,
-        provider=?,
+        provedor=?,
         uid=?
     WHERE usuarioId=?`, [
             usuario.nome,
@@ -71,7 +77,7 @@ async function update(id, usuario) {
             usuario.celular,
             usuario.nascimento,
             usuario.perfilId,
-            usuario.provider,
+            usuario.provedor,
             usuario.uid,
             id
         ]
