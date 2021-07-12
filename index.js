@@ -39,6 +39,7 @@ const base = require('./routes/base.route');
 const usuario = require('./routes/usuario.route');
 const cargo = require('./routes/cargo.route');
 const perfil = require('./routes/perfil.route');
+const pastoral = require('./routes/pastoral.route');
 /* Routes */
 
 app.use(helmet());
@@ -58,6 +59,7 @@ app.use('/api/base', base);
 app.use('/api/usuario', usuario);
 app.use('/api/cargo', cargo);
 app.use('/api/perfil', perfil);
+app.use('/api/pastoral', pastoral);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
