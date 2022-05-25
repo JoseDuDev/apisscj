@@ -1,12 +1,19 @@
 const db = require('./db');
 const helper = require('../helper');
 const config = require('../config');
-const nome_tabela = "pastoral";
-
+const nome_tabela = "pastorais";
+/*  `id` int(11) NOT NULL,
+  `icone` varchar(255) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `introducao` text NOT NULL,
+  `status` enum('S','N') NOT NULL DEFAULT 'S',
+  `id_o` int(11) NOT NULL,
+  `urlcheck` varchar(255) NOT NULL
+ */
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
-    `SELECT pastoralId, nome, avatar, descricao, cor, criado, alterado, ativo
+    `SELECT id, titulo, icone, introducao, id_o, urlcheck, status
     FROM ${nome_tabela} LIMIT ?,?`, [offset, config.listPerPage]
   );
   const data = helper.emptyOrRows(rows);
@@ -21,13 +28,15 @@ async function getMultiple(page = 1) {
 async function create(pastoral) {
   const result = await db.query(
     `INSERT INTO ${nome_tabela} 
-        (nome, avatar, descricao, cor, criado, alterado, ativo) 
+        (titulo, icone, introducao, id_o, urlcheck, status) 
         VALUES 
         (?,?,?,?,SYSDATE(), SYSDATE(), 1)`, [
-    pastoral.nome,
-    pastoral.avatar,
-    pastoral.descricao,
-    pastoral.cor
+    pastoral.titulo,
+    pastoral.icone,
+    pastoral.introducao,
+    pastoral.id_o,
+    pastoral.urlcheck,
+    pastoral.status
   ]
   );
 
@@ -43,18 +52,19 @@ async function create(pastoral) {
 async function update(id, pastoral) {
   const result = await db.query(
     `UPDATE ${nome_tabela}
-    SET nome=?,
-        avatar=?,
-        descricao=?,
-        cor=?,
-        alterado=SYSDATE(),
-        ativo=?
-    WHERE pastoralId=?`, [
-    pastoral.nome,
-    pastoral.avatar,
-    pastoral.descricao,
-    pastoral.cor,
-    pastoral.ativo,
+    SET titulo=?,
+        icone=?,
+        introducao=?,
+        id_o=?,
+        urlcheck=?,
+        status=?
+    WHERE id=?`, [
+    pastoral.titulo,
+    pastoral.icone,
+    pastoral.introducao,
+    pastoral.id_o,
+    pastoral.urlcheck,
+    pastoral.status,
     id
   ]
   );
@@ -70,7 +80,7 @@ async function update(id, pastoral) {
 
 async function remove(id) {
   const result = await db.query(
-    `DELETE FROM ${nome_tabela} WHERE pastoralId=?`, [id]
+    `DELETE FROM ${nome_tabela} WHERE id=?`, [id]
   );
 
   let message = 'Erro ao deletar pastoral';
@@ -84,8 +94,8 @@ async function remove(id) {
 
 async function get(id) {
   const rows = await db.query(
-    `SELECT pastoralId, nome, avatar, descricao, cor, criado, alterado, ativo
-    FROM ${nome_tabela} WHERE pastoralId=?`, [id]
+    `SELECT id, titulo, icone, introducao, id_o, urlcheck, status
+    FROM ${nome_tabela} WHERE id=?`, [id]
   );
   const data = helper.emptyOrRows(rows);
 

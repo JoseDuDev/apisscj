@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const base = require('../services/base');
+const geral = require('../services/geral');
 
 /* GET programming languages. */
 router.get('/', async function(req, res, next) {
     try {
-        res.json(await base.get());
+        res.json(await geral.get());
     } catch (err) {
-        console.error(`Erro ao obter base`, err.message);
+        console.error(`Erro ao obter gerais`, err.message);
         next(err);
     }
 });

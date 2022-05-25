@@ -7,7 +7,7 @@ router.get('/', async function (req, res, next) {
   try {
     res.json(await pastoral.getMultiple(req.query.page));
   } catch (err) {
-    console.error(`Erro ao obter pastoral`, err.message);
+    console.error(`Erro ao obter pastorais`, err.message);
     next(err);
   }
 });

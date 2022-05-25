@@ -35,7 +35,7 @@ const port = process.env.PORT || 3300;
 
 /* Routes */
 // const programmingLanguagesRouter = require('./routes/programmingLanguages');
-const base = require('./routes/base.route');
+const base = require('./routes/geral.route');
 const usuario = require('./routes/usuario.route');
 const cargo = require('./routes/cargo.route');
 const perfil = require('./routes/perfil.route');
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 })
 
 // app.use('/api/programming-languages', programmingLanguagesRouter);
-app.use('/api/base', base);
+app.use('/api/geral', base);
 app.use('/api/usuario', usuario);
 app.use('/api/cargo', cargo);
 app.use('/api/perfil', perfil);
